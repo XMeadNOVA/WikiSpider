@@ -30,15 +30,15 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- *
+ * Class used for retrieving HTML pages.
  * @author Xan Mead
  */
 public class PageGetter {
 	
 	/**
 	 * Precondition: URL is valid.
-	 * @param url 
-	 * @return  
+	 * @param url URL of the web page to be retrieved.
+	 * @return Document object containing the html of the requested page.
 	 */
 	public static Document doGet(String url) {
 		
@@ -74,7 +74,6 @@ public class PageGetter {
 		} catch (SAXException | ParserConfigurationException ex) {
 			ex.printStackTrace();
 		}
-		
 		return dom;
 	}
 }
