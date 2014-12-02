@@ -24,4 +24,46 @@ import adt.queue.Queue;
  */
 public interface GraphInterface<T> {
 	
+	/** @return true if this graph has no vertices; otherwise, returns false. */
+	boolean isEmpty();
+	
+	/** @return true if the graph is full; otherwise, returns false. */
+	boolean isFull();
+	
+	/**
+	 * Adds a vertex to the graph.
+	 * @param vertex Element to be added as a vertex.
+	 */
+	void addVertex(T vertex);
+	
+	/**
+	 * Check if an object is a vertex in this graph.
+	 * @param vertex Object to search for.
+	 * @return true if the object is a vertex; otherwise, returns false.
+	 */
+	boolean hasVertex(T vertex);
+	
+	/**
+	 * Returns a queue of each vertex adjacent to {@code vertex}.
+	 * @param vertex Vertex for which to check adjacencies.
+	 * @return Queue of all adjacencies.
+	 */
+	Queue<T> getToVertices(T vertex);
+	
+	/** Sets the mark on each vertex to false. */
+	void clearMarks();
+	
+	/**
+	 * Sets the mark on vertex to true.
+	 * @param vertex Vertex to be marked.
+	 */
+	void markVertex(T vertex);
+	
+	/**
+	 * Tells whether a vertex is marked or not.
+	 * @param vertex Vertex to check.
+	 * @return true if the vertex is marked; false if it is not.
+	 */
+	boolean isMarked(T vertex);
+	
 }
