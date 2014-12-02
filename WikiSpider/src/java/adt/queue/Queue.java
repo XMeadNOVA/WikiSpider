@@ -3,10 +3,10 @@
  * amm28964@email.vccs.edu
  */
 
-package queue;
+package adt.queue;
 
 import java.util.Iterator;
-import linked_list.LinkedList;
+import adt.linked_list.LinkedList;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 

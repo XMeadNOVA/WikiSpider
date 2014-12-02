@@ -2,7 +2,7 @@
  * Xan Mead - Fall 2014
  * amm28964@email.vccs.edu
  */
-package queue;
+package adt.queue;
 
 /**
  * To be thrown when an empty Queue is asked to dequeue.

@@ -3,7 +3,7 @@
  * CSC 202/73N * 
  */
 
-package heap;
+package adt.heap;
 
 /**
  * This exception is thrown when an empty priority queue attempts to dequeue.

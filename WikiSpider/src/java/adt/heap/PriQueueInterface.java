@@ -3,7 +3,7 @@
  * CSC 202/73N * 
  */
 
-package heap;
+package adt.heap;
 
 /**
  * A priority queue is a collection in which only the highest priority element

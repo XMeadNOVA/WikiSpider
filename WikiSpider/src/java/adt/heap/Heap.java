@@ -3,7 +3,7 @@
  * CSC 202/73N * 
  */
 
-package heap;
+package adt.heap;
 
 import java.util.ArrayList;
 

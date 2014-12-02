@@ -3,7 +3,7 @@
  * amm28964@email.vccs.edu
  */
 
-package linked_list;
+package adt.linked_list;
 
 import java.io.Serializable;
 import java.util.ArrayList;

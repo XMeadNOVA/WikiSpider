@@ -2,9 +2,9 @@
  * Xan Mead 2014
  * CSC 202/73N * 
  */
-package graph;
+package adt.graph;
 
-import queue.Queue;
+import adt.queue.Queue;
 
 /**
  * A class that implements this interface will meet the ADT specifications for
