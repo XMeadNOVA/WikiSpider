@@ -16,7 +16,8 @@
  */
 package wiki;
 
-import java.util.LinkedList; // Replace with own ADT
+import adt.linked_list.LinkedList;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
@@ -39,4 +40,11 @@ public class Article {
 	
 	/** Other articles referenced within the article. */
 	private LinkedList<String> links;
+	
+	/** Tells whether the article's content has been parsed. */
+	private boolean contentReady;
+	
+	public Article(Document page) {
+		
+	}
 }
