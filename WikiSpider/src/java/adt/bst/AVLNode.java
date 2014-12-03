@@ -20,6 +20,47 @@ package adt.bst;
  *
  * @author Xan Mead
  */
-public class AVLNode {
+public class AVLNode<T extends Comparable<T>> {
 	
+	/** Parent of this node. */
+	private AVLNode<T> parent;
+	
+	/** Child whose value is less than that of this node. */
+	private AVLNode<T> left;
+	
+	/** Child whose value is greater than that of this node. */
+	private AVLNode<T> right;
+	
+	/** Value of this node. */
+	private T value;
+	
+	/** [Height of left subtree] - [Height of right subtree] */
+	private int balanceFactor;
+	
+	/** Denotes whether this node is the terminal root of a tree. */
+	private boolean isRoot;
+	
+	/** Denotes whether this node does or does not have children. */
+	private boolean isLeaf;
+	
+	/** @return Parent of this node. */
+	public AVLNode<T> getParent() {return parent;}
+	
+	/** @return Left child of this node. */
+	public AVLNode<T> getLeft() {return left;}
+	
+	/** @return Right child of this node. */
+	public AVLNode<T> getRight() {return right;}
+	
+	/** @return Value of this node. */
+	public T getValue() {return value;}
+	
+	/** @return Balance factor of this node. */
+	public int getBalanceFactor() {return balanceFactor;}
+	
+	/** @return true if this node is a terminal root; otherwise returns false. */
+	public boolean isRoot() {return isRoot;}
+	
+	/** @return true if this node has no children; otherwise returns false. */
+	public boolean isLeaf() {return isLeaf;}
 }
