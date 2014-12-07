@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 HP
+ * Copyright (C) 2014 Xan Mead
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@ package adt.graph;
 
 /**
  *
- * @author HP
+ * @author Xan Mead
  */
-public class Vertex {
+public class Vertex<T> {
 	
 }
