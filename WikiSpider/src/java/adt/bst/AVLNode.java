@@ -43,6 +43,8 @@ public class AVLNode<T extends Comparable<T>> {
 	/** Denotes whether this node does or does not have children. */
 	private boolean isLeaf;
 	
+	/* - START GETTERS - */
+	
 	/** @return Parent of this node. */
 	public AVLNode<T> getParent() {return parent;}
 	
@@ -63,4 +65,60 @@ public class AVLNode<T extends Comparable<T>> {
 	
 	/** @return true if this node has no children; otherwise returns false. */
 	public boolean isLeaf() {return isLeaf;}
+	
+	/* - END GETTERS - */
+	
+	/**
+	 * Tells whether a value is contained in the subtree.
+	 * @param query Value to be found.
+	 * @return true if the value is present in this subtree; otherwise, false.
+	 */
+	public boolean contains(T query) {
+		if (value == null || query == null) {
+			return false;
+		}
+		int comp = query.compareTo(value);
+		if (comp == 0) {
+			return true;
+		}
+		if (comp < 0 && left != null) {
+			return left.contains(query);
+		}
+		if (comp > 0 && right != null) {
+			return right.contains(query);
+		}
+		return false;
+	}
+	
+	/**
+	 * Precondition: {@code query} exists in the subtree.
+	 * @param query Value to be retrieved.
+	 * @return The value as it stored in the tree.
+	 */
+	public T get(T query) {
+		int comp = query.compareTo(value);
+		if (comp == 0) {
+			return value;
+		}
+		if (comp < 0) {
+			return left.get(query);
+		}
+		return right.get(query);
+	}
+	
+	/**
+	 * Precondition: {@code: nodeValue} exists in the subtree.
+	 * @param nodeValue Value of the node to be retrieved.
+	 * @return The node containing {@code nodeValue}
+	 */
+	public AVLNode<T> getNode(T nodeValue) {
+		int comp = nodeValue.compareTo(value);
+		if (comp == 0) {
+			return this;
+		}
+		if (comp < 0) {
+			return left.getNode(nodeValue);
+		}
+		return right.getNode(nodeValue);
+	}
 }

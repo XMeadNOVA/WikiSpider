@@ -16,10 +16,33 @@
  */
 package adt.bst;
 
+import adt.queue.Queue;
+
 /**
  *
  * @author Xan Mead
  */
-public class AVLTree {
+public class AVLTree<T extends Comparable<T>> {
 	
+	/** Root node of this tree. */
+	private AVLNode<T> root;
+	
+	private Order order;
+	
+	private Queue<T> traversalQueue;
+	
+	/** Number of nodes in the tree. */
+	private int size;
+	
+	public boolean contains(T query) {
+		return root.contains(query);
+	}
+	
+	public T get(T query) {
+		return root.get(query);
+	}
+	
+	public AVLNode<T> getNode(T nodeValue) {
+		return root.getNode(nodeValue);
+	}
 }
