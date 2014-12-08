@@ -17,7 +17,6 @@
 package wiki;
 
 import adt.linked_list.LinkedList;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
@@ -25,6 +24,9 @@ import org.w3c.dom.Element;
  * @author Xan Mead
  */
 public class Article {
+	
+	/** URL to the article. */
+	private String permalink;
 	
 	/** Name of the article. */
 	private String name;
@@ -41,10 +43,4 @@ public class Article {
 	/** Other articles referenced within the article. */
 	private LinkedList<String> links;
 	
-	/** Tells whether the article's content has been parsed. */
-	private boolean contentReady;
-	
-	public Article(Document page) {
-		
-	}
 }
