@@ -17,6 +17,8 @@
 
 package spider;
 
+import adt.queue.Queue;
+import adt.queue.QueueUnderflowException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
@@ -35,12 +37,67 @@ import org.xml.sax.SAXException;
  */
 public class PageGetter {
 	
+	private Queue<PageGetJob> jobQueue;
+	
+	private Queue<PageParseJob> finishedJobs;
+	
+	private int jobsReceived;
+	
+	private int jobsCompleted;
+	
+	private int jobsReleased;
+	
+	public PageGetter() {
+		jobQueue = new Queue<>();
+		finishedJobs = new Queue<>();
+		jobsReceived = 0;
+		jobsCompleted = 0;
+		jobsReleased = 0;
+	}
+	
+	/**
+	 * 
+	 * @param job 
+	 */
+	public void addJob(PageGetJob job) {
+		jobsReceived++;
+		jobQueue.enqueue(job);
+	}
+	
+	public boolean hasJobs() {
+		return !jobQueue.isEmpty();
+	}
+	
+	public boolean hasFinishedJob() {
+		return !finishedJobs.isEmpty();
+	}
+	
+	/**
+	 * Precondition: {@code finishedJobs} is not empty.
+	 * @return 
+	 */
+	public PageParseJob getFinishedJob() {
+		try {
+			jobsReleased++;
+			return finishedJobs.dequeue();
+		} catch (QueueUnderflowException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+//	private PageParseJob processJob() {
+//		// PROCESS JOB
+//		jobsCompleted++;
+//		return finished;
+//	}
+	
 	/**
 	 * Precondition: URL is valid.
 	 * @param url URL of the web page to be retrieved.
 	 * @return Document object containing the html of the requested page.
 	 */
-	public static Document doGet(String url) {
+	public Document doGet(String url) {
 		
 		Document dom = null;
 		
