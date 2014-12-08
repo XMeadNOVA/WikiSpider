@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 amm28964
+ * Copyright (C) 2014 Xan Mead
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,10 +17,53 @@
 
 package spider;
 
+import adt.queue.Queue;
+import adt.queue.QueueUnderflowException;
+import wiki.Article;
+
 /**
  *
- * @author amm28964
+ * @author Xan Mead
  */
 public class PageParser {
+	private Queue<PageParseJob> jobQueue;
 	
+	private Queue<Article> finishedArticles;
+	
+	private int jobsReceived;
+	
+	private int jobsProcessed;
+	
+	private int jobsReleased;
+	
+	public PageParser() {
+		jobQueue = new Queue<>();
+		finishedArticles = new Queue<>();
+		jobsReceived = 0;
+		jobsProcessed = 0;
+		jobsReleased = 0;
+	}
+	
+	public boolean hasJobs() {
+		return !jobQueue.isEmpty();
+	}
+	
+	public boolean hasFinishedArticle() {
+		return !finishedArticles.isEmpty();
+	}
+	
+	public void addJob(PageParseJob job) {
+		jobQueue.enqueue(job);
+		jobsReceived++;
+	}
+	
+	public Article getFinishedArticle() {
+		try {
+			jobsReleased++;
+			return finishedArticles.dequeue();
+		} catch (QueueUnderflowException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
 }
