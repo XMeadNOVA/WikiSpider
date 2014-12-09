@@ -16,14 +16,18 @@
  */
 package adt.graph;
 
+import adt.bst.AVLTree;
 import adt.queue.Queue;
 
 /**
  * 
  * @author Xan Mead
+ * @param <T>
  */
-public class Graph<T> implements GraphInterface<T> {
-
+public class Graph<T extends Comparable<T>> implements GraphInterface<T> {
+	
+	private AVLTree<Vertex<T>> vertices;
+	
 	@Override
 	public boolean isEmpty() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
