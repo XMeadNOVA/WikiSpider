@@ -20,6 +20,11 @@ package adt.graph;
  *
  * @author Xan Mead
  */
-public class Vertex<T> {
-	
+public class Vertex<T extends Comparable<T>> implements Comparable<Vertex<T>> {
+
+	@Override
+	public int compareTo(Vertex o) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
 }
