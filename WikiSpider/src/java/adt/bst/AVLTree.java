@@ -45,4 +45,8 @@ public class AVLTree<T extends Comparable<T>> {
 	public AVLNode<T> getNode(T nodeValue) {
 		return root.getNode(nodeValue);
 	}
+	
+	public void add(T value) {
+		
+	}
 }
