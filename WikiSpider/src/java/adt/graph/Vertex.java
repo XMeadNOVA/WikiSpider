@@ -16,15 +16,41 @@
  */
 package adt.graph;
 
+import adt.bst.AVLTree;
+
 /**
  *
  * @author Xan Mead
  */
 public class Vertex<T extends Comparable<T>> implements Comparable<Vertex<T>> {
-
+	
+	private T value;
+	
+	private AVLTree<Vertex<T>> toVertices;
+	
+	public Vertex(T value) {
+		this.value = value;
+	}
+	
+	public T getValue() {
+		return value;
+	}
+	
+	public void setValue(T value) {
+		this.value = value;
+	}
+	
+	public void addEdgeTo(Vertex other) {
+		toVertices.add(other);
+	}
+	
+	public boolean hasEdgeTo(Vertex other) {
+		return toVertices.contains(other);
+	}
+	
 	@Override
 	public int compareTo(Vertex o) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return value.compareTo((T) o.getValue());
 	}
 
 }
