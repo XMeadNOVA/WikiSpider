@@ -30,42 +30,44 @@ public class Graph<T extends Comparable<T>> implements GraphInterface<T> {
 	
 	@Override
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return vertices.size() > 0;
 	}
 
 	@Override
 	public boolean isFull() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return false;
 	}
 
 	@Override
-	public void addVertex(T vertex) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public void addVertex(T vertexValue) {
+		vertices.add(new Vertex<>(vertexValue));
 	}
 
 	@Override
-	public boolean hasVertex(T vertex) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public boolean hasVertex(T vertexValue) {
+		return vertices.contains(new Vertex<>(vertexValue));
 	}
 
 	@Override
-	public Queue<T> getToVertices(T vertex) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public Queue<Vertex<T>> getToVertices(T vertex) {
+		return vertices.get(new Vertex<>(vertex)).getToVertices();
 	}
 
 	@Override
 	public void clearMarks() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		for (Vertex v : vertices) {
+			v.unmark();
+		}
 	}
 
 	@Override
 	public void markVertex(T vertex) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		vertices.get(new Vertex<>(vertex)).mark();
 	}
 
 	@Override
 	public boolean isMarked(T vertex) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return vertices.get(new Vertex<>(vertex)).isMarked();
 	}
 	
 }
