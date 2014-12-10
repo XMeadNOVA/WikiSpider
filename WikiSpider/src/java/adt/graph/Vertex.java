@@ -17,6 +17,8 @@
 package adt.graph;
 
 import adt.bst.AVLTree;
+import adt.bst.Order;
+import adt.queue.Queue;
 
 /**
  *
@@ -25,6 +27,8 @@ import adt.bst.AVLTree;
 public class Vertex<T extends Comparable<T>> implements Comparable<Vertex<T>> {
 	
 	private T value;
+	
+	private boolean mark;
 	
 	private AVLTree<Vertex<T>> toVertices;
 	
@@ -40,12 +44,29 @@ public class Vertex<T extends Comparable<T>> implements Comparable<Vertex<T>> {
 		this.value = value;
 	}
 	
+	public void mark() {
+		mark = true;
+	}
+	
+	public void unmark() {
+		mark = false;
+	}
+	
+	public boolean isMarked() {
+		return mark;
+	}
+	
 	public void addEdgeTo(Vertex other) {
 		toVertices.add(other);
 	}
 	
 	public boolean hasEdgeTo(Vertex other) {
 		return toVertices.contains(other);
+	}
+	
+	public Queue<Vertex<T>> getToVertices() {
+		toVertices.resetTraversalQueue(Order.INORDER);
+		return toVertices.getTraversalQueue();
 	}
 	
 	@Override
