@@ -34,6 +34,12 @@ public class AVLTree<T extends Comparable<T>> {
 	/** Number of nodes in the tree. */
 	private int size;
 	
+	public AVLTree() {
+		root = new AVLNode<>();
+		order = Order.INORDER;
+		size = 0;
+	}
+	
 	public boolean contains(T query) {
 		return root.contains(query);
 	}
