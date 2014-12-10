@@ -17,12 +17,13 @@
 package adt.bst;
 
 import adt.queue.Queue;
+import java.util.Iterator;
 
 /**
  *
  * @author Xan Mead
  */
-public class AVLTree<T extends Comparable<T>> {
+public class AVLTree<T extends Comparable<T>> implements Iterable<T> {
 	
 	/** Root node of this tree. */
 	private AVLNode<T> root;
@@ -36,8 +37,12 @@ public class AVLTree<T extends Comparable<T>> {
 	
 	public AVLTree() {
 		root = new AVLNode<>();
-		order = Order.INORDER;
 		size = 0;
+		resetTraversalQueue(Order.INORDER);
+	}
+	
+	public int size() {
+		return size;
 	}
 	
 	public boolean contains(T query) {
@@ -54,5 +59,52 @@ public class AVLTree<T extends Comparable<T>> {
 	
 	public void add(T value) {
 		
+	}
+	
+	public Queue<T> getTraversalQueue() {
+		return traversalQueue;
+	}
+	
+	public void resetTraversalQueue(Order order) {
+		this.order = order;
+		traversalQueue = new Queue<>();
+		if (order == Order.INORDER) {
+			inorder(root);
+		}
+		else if (order == Order.POSTORDER) {
+			postorder(root);
+		}
+		else {
+			preorder(root);
+		}
+	}
+	
+	private void preorder(AVLNode<T> node) {
+		if (node != null) {
+			traversalQueue.enqueue(node.getValue());
+			preorder(node.getLeft());
+			preorder(node.getRight());
+		}
+	}
+	
+	private void inorder(AVLNode<T> node) {
+		if (node != null) {
+			inorder(node.getLeft());
+			traversalQueue.enqueue(node.getValue());
+			inorder(node.getRight());
+		}
+	}
+	
+	private void postorder(AVLNode<T> node) {
+		if (node != null) {
+			postorder(node.getLeft());
+			postorder(node.getRight());
+			traversalQueue.enqueue(node.getValue());
+		}
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return traversalQueue.iterator();
 	}
 }
