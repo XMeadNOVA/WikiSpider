@@ -160,13 +160,34 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 			 * Recolor, proceed to grandparent */
 			if (node.parent().sibling().isRed()) {
 				
+				// Color parent
+				node.parent().setColor(RBNode.BLACK);
+				
+				// Color uncle
+				RBNode<T> uncle = node.parent().sibling();
+				if (uncle != null) {
+					uncle.setColor(RBNode.BLACK);
+				}
+				
+				// Color grandparent
+				RBNode<T> grand = node.parent().parent();
+				if (grand != null) {
+					grand.setColor(RBNode.RED);
+					// Continue adjustment
+					adjustAfterInsertion(grand);
+				}
 			}
 			
 			/* 2b) Uncle is black, parent is left child.
 			 * One right rotation if node is also left child,
 			 * otherwise left-right rotation. */
 			else if (node.parent().isLeftChild()) {
-				
+				if (node.isLeftChild()) {
+					rotateLeft(node.parent());
+				}
+				node.parent().setColor(RBNode.BLACK);
+				node.parent().parent().setColor(RBNode.RED);
+				rotateRight(node.parent().parent());
 			}
 			
 			/* 2b) Uncle is black, parent is right child.
@@ -179,6 +200,14 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 		
 		// 3) Color Root black
 		root.setColor(RBNode.BLACK); // I see a red node and I want to paint it black.
+	}
+	
+	private void rotateLeft(RBNode<T> node) {
+		
+	}
+	
+	private void rotateRight(RBNode<T> node) {
+		
 	}
 	
 	/**
