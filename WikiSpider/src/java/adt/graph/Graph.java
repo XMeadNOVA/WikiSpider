@@ -16,7 +16,7 @@
  */
 package adt.graph;
 
-import adt.bst.AVLTree;
+import adt.bst.RBTree;
 import adt.queue.Queue;
 
 /**
@@ -26,7 +26,7 @@ import adt.queue.Queue;
  */
 public class Graph<T extends Comparable<T>> implements GraphInterface<T> {
 	
-	private AVLTree<Vertex<T>> vertices;
+	private RBTree<Vertex<T>> vertices;
 	
 	@Override
 	public boolean isEmpty() {
@@ -48,9 +48,17 @@ public class Graph<T extends Comparable<T>> implements GraphInterface<T> {
 		return vertices.contains(new Vertex<>(vertexValue));
 	}
 
-	@Override
-	public Queue<Vertex<T>> getToVertices(T vertex) {
+	public Queue<Vertex<T>> getAdjacentVertices(T vertex) {
 		return vertices.get(new Vertex<>(vertex)).getToVertices();
+	}
+	
+	@Override
+	public Queue<T> getToVertices(T vertex) {
+		Queue<T> vertexValues = new Queue<>();
+		for (Vertex<T> v : getAdjacentVertices(vertex)) {
+			vertexValues.enqueue(v.getValue());
+		}
+		return vertexValues;
 	}
 
 	@Override
