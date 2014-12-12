@@ -16,7 +16,7 @@
  */
 package adt.graph;
 
-import adt.bst.AVLTree;
+import adt.bst.RBTree;
 import adt.bst.Order;
 import adt.queue.Queue;
 
@@ -30,7 +30,7 @@ public class Vertex<T extends Comparable<T>> implements Comparable<Vertex<T>> {
 	
 	private boolean mark;
 	
-	private AVLTree<Vertex<T>> toVertices;
+	private RBTree<Vertex<T>> toVertices;
 	
 	public Vertex(T value) {
 		this.value = value;
