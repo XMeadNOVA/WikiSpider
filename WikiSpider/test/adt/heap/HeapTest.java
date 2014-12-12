@@ -28,21 +28,15 @@ import static org.junit.Assert.*;
  */
 public class HeapTest {
 	
-	private Heap<String> testHeap;
-	
 	ArrayList<String> setRepo;
 	
 	public HeapTest() {
 		
-		testHeap = new Heap<>(50);
+		setRepo = new ArrayList<>(40);
 		
 		String set = "QWERTYUIOPASDFGHJKLZXCVBNM";
 		for (int i = 0; i < 40; i++) {
-			try {
-				testHeap.enqueue("" + set.charAt(((int)(Math.random()*set.length()))));
-			} catch (PriQOverflowException ex) {
-				Logger.getLogger(HeapTest.class.getName()).log(Level.SEVERE, null, ex);
-			}
+			setRepo.add("" + set.charAt(((int)(Math.random()*set.length()))));
 		}
 	}
 
@@ -50,28 +44,40 @@ public class HeapTest {
 	 * Test of isEmpty method, of class Heap.
 	 */
 	@Test
-	public void testIsEmpty() {
+	public void testIsEmpty() throws PriQOverflowException {
 		System.out.println("isEmpty");
-		Heap instance = null;
-		boolean expResult = false;
+		Heap instance = new Heap<>(5);
+		
 		boolean result = instance.isEmpty();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertTrue("Heap is empty.", result);
+		instance.enqueue("bar");
+		
+		result = instance.isEmpty();
+		assertFalse("Heap is not empty.", result);
 	}
 
 	/**
 	 * Test of isFull method, of class Heap.
 	 */
 	@Test
-	public void testIsFull() {
+	public void testIsFull() throws PriQOverflowException {
 		System.out.println("isFull");
-		Heap instance = null;
-		boolean expResult = false;
+		Heap instance = new Heap<>(5);
+		
 		boolean result = instance.isFull();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertFalse("Heap is empty.", result);
+		instance.enqueue("foo");
+		instance.enqueue("bar");
+		
+		result = instance.isFull();
+		assertFalse("Heap is not full.", result);
+		
+		instance.enqueue("Alice");
+		instance.enqueue("Bob");
+		instance.enqueue("Charles");
+		
+		result = instance.isFull();
+		assertTrue("Heap is full.", result);
 	}
 
 	/**
@@ -80,11 +86,19 @@ public class HeapTest {
 	@Test
 	public void testEnqueue() throws Exception {
 		System.out.println("enqueue");
-		Object element = null;
-		Heap instance = null;
-		instance.enqueue(element);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		
+		Heap<String> instance = new Heap<>(40);
+		for (String s : setRepo) {
+			instance.enqueue(s);
+		}
+		
+		String last = instance.dequeue();
+		
+		for (int i = 0; i < 40; i++) {
+			String item = instance.dequeue();
+			assertTrue("This item is greater than or equal to its predecessor.", item.compareTo(last) >= 0);
+			last = item;
+		}
 	}
 
 	/**
