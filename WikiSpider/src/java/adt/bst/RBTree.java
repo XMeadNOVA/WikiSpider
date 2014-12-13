@@ -158,7 +158,7 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 		if (node.parent() != null && node.parent().isRed()) {
 			/* 2a) Uncle is red
 			 * Recolor, proceed to grandparent */
-			if (node.parent().sibling().isRed()) {
+			if (node.parent().sibling() != null && node.parent().sibling().isRed()) {
 				
 				// Color parent
 				node.parent().setColor(RBNode.BLACK);
@@ -182,7 +182,7 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 			 * One right rotation if node is also left child,
 			 * otherwise left-right rotation. */
 			else if (node.parent().isLeftChild()) {
-				if (node.isLeftChild()) {
+				if (node.isRightChild()) {
 					rotateLeft(node.parent());
 				}
 				node.parent().setColor(RBNode.BLACK);
@@ -190,11 +190,16 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 				rotateRight(node.parent().parent());
 			}
 			
-			/* 2b) Uncle is black, parent is right child.
+			/* 2c) Uncle is black, parent is right child.
 			 * One left rotation if node is also right child,
 			 * otherwise right-left rotation. */
 			else if (node.parent().isRightChild()) {
-				
+				if (node.isLeftChild()) {
+					rotateRight(node.parent());
+				}
+				node.parent().setColor(RBNode.BLACK);
+				node.parent().parent().setColor(RBNode.RED);
+				rotateLeft(node.parent().parent());
 			}
 		}
 		
@@ -202,12 +207,24 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 		root.setColor(RBNode.BLACK); // I see a red node and I want to paint it black.
 	}
 	
-	private void rotateLeft(RBNode<T> node) {
-		
+	/**
+	 * Rotates the tree to the left around the given node.
+	 * @param root Node around which to rotate.
+	 */
+	private void rotateLeft(RBNode<T> root) {
+		RBNode<T> pivot = root.right();
+		root.setRight(pivot.left());
+		pivot.setLeft(root);
 	}
 	
-	private void rotateRight(RBNode<T> node) {
-		
+	/**
+	 * Rotates the tree to the right around the given node.
+	 * @param root Node around which to rotate.
+	 */
+	private void rotateRight(RBNode<T> root) {
+		RBNode<T> pivot = root.left();
+		root.setLeft(pivot.right());
+		pivot.setRight(root);
 	}
 	
 	/**
