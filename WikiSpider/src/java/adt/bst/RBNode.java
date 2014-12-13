@@ -85,15 +85,26 @@ public class RBNode<T extends Comparable<T>> {
 		return parent.right() == this;
 	}
 	
+	// Precondition: parent is not null
 	public boolean isLeftChild() {
 		return parent.left() == this;
 	}
 	
-	public void setRight(RBNode<T> n) {right = n;}
+	public void setRight(RBNode<T> n) {
+		right = n;
+		right.setParent(this);
+	}
 	
-	public void setLeft(RBNode<T> n) {left = n;}
+	public void setLeft(RBNode<T> n) {
+		left = n;
+		left.setParent(this);
+	}
 	
-	public void setParent(RBNode<T> n) {parent = n;}
+	public void setParent(RBNode<T> n) {
+		parent = n;
+	}
 	
-	public void setColor(boolean color)	{isRed = color;}
+	public void setColor(boolean color)	{
+		isRed = color;
+	}
 }
